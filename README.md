@@ -1,6 +1,6 @@
 # arduino-autosar-cluster
 
-A mini **AUTOSAR Classic instrument cluster** on an Arduino Uno (ATmega328P), written bare metal in C. It does not use the Arduino core. Every layer is hand written, from the MCAL register drivers up to the application SWCs, and the RTE is generated from an ARXML model by [arxml2rte](https://github.com/thanhluan1736-byte/arxml2rte).
+A mini **AUTOSAR Classic instrument cluster** on an Arduino Uno (ATmega328P), written bare metal in C. It does not use the Arduino core. Every layer is hand written, from the MCAL register drivers up to the application SWCs, and the RTE is generated from an ARXML model by arxml2rte, my own small RTE generator (a separate repository, not public yet). The generated RTE is committed in `src/Rte`, so the project builds without it.
 
 It uses only parts from the Keywish RFID starter kit:
 
@@ -122,7 +122,7 @@ pio device monitor           # UART log, 115200 baud
 
 Current size: 622 B RAM (30 %), 8.6 KB flash (27 %).
 
-The ARXML model is written by `tools/make_arxml.py` (SWCs, ports and connectors are listed at the top of the script). After a change, rebuild the model and regenerate the RTE. The second script expects the `arxml2rte` repository next to this one:
+The ARXML model is written by `tools/make_arxml.py` (SWCs, ports and connectors are listed at the top of the script). After a change, rebuild the model and regenerate the RTE. The second script needs the arxml2rte generator in a folder next to this one (or its path in `-Generator`):
 
 ```bash
 python tools/make_arxml.py model/Cluster.arxml
