@@ -31,6 +31,7 @@ typedef struct
 } Gpt_ConfigType;
 
 #define GPT_TICK_US                   4U
+#define GPT_TICKS_PER_MS              (1000U / GPT_TICK_US)   /* 250 */
 #define GpConf_GptChannel_OsTick      0U
 
 extern const Gpt_ConfigType Gpt_Config;

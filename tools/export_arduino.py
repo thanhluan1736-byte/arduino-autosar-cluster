@@ -1,4 +1,4 @@
-"""Exports the project as an Arduino IDE sketch (all sources flattened into one folder).
+"""Exports the Arduino Uno build as an Arduino IDE sketch (src/ + platform/avr/ flattened into one folder).
 
 Usage: python tools/export_arduino.py            -> arduino/cluster_ecu/cluster_ecu.ino + *.c / *.h
 
@@ -10,7 +10,7 @@ import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(ROOT, "src")
+SOURCES = [os.path.join(ROOT, "src"), os.path.join(ROOT, "platform", "avr")]
 NAME = "cluster_ecu"
 OUT = os.path.join(ROOT, "arduino", NAME)
 
@@ -19,7 +19,7 @@ INO = """/*
  *
  * This sketch is intentionally empty: the firmware does NOT use setup()/loop() or the Arduino core.
  * main() is in Main.c -> EcuM_Init() -> Os_Start(). All other files of this folder are the AUTOSAR layers
- * (MCAL, services, CDD, generated RTE, SWCs) copied flat from src/ of the PlatformIO project.
+ * (MCAL, services, CDD, generated RTE, SWCs) copied flat from src/ and platform/avr/ of the project.
  *
  * Board: Arduino Uno. Serial Monitor: 115200 baud.
  */
@@ -33,14 +33,15 @@ def main():
         if f.endswith((".c", ".h", ".ino")):
             os.remove(os.path.join(OUT, f))
     seen = {}
-    for dirpath, _, files in os.walk(SRC):
-        for f in sorted(files):
-            if not f.endswith((".c", ".h")):
-                continue
-            if f in seen:
-                sys.exit("name clash: %s in %s and %s" % (f, seen[f], dirpath))
-            seen[f] = dirpath
-            shutil.copy2(os.path.join(dirpath, f), os.path.join(OUT, f))
+    for src in SOURCES:
+        for dirpath, _, files in os.walk(src):
+            for f in sorted(files):
+                if not f.endswith((".c", ".h")):
+                    continue
+                if f in seen:
+                    sys.exit("name clash: %s in %s and %s" % (f, seen[f], dirpath))
+                seen[f] = dirpath
+                shutil.copy2(os.path.join(dirpath, f), os.path.join(OUT, f))
     with open(os.path.join(OUT, NAME + ".ino"), "w", encoding="utf-8", newline="\n") as fh:
         fh.write(INO)
     print("exported %d files to %s" % (len(seen) + 1, OUT))

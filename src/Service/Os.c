@@ -1,12 +1,9 @@
-/* Os.c - time-triggered scheduler: one tick per ms, tasks run to completion, idle = CPU sleep */
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include <avr/sleep.h>
+/* Os.c - time-triggered scheduler: one tick per ms, tasks run to completion, idle = CPU sleep (portable) */
 #include "Os.h"
+#include "Os_Port.h"
 #include "Gpt.h"
 
 #define OS_MAX_TASKS        8U
-#define OS_TIMER_TICKS_1MS  (1000U / GPT_TICK_US)   /* 250 x 4 us */
 
 static volatile uint8 Os_PendingTicks = 0U;
 static uint16 Os_Countdown[OS_MAX_TASKS];
@@ -56,27 +53,23 @@ static void Os_RunTick(void)
 void Os_Start(void)
 {
     Gpt_EnableNotification(GpConf_GptChannel_OsTick);
-    Gpt_StartTimer(GpConf_GptChannel_OsTick, OS_TIMER_TICKS_1MS);
-    set_sleep_mode(SLEEP_MODE_IDLE);
-    sei();
+    Gpt_StartTimer(GpConf_GptChannel_OsTick, (Gpt_ValueType)GPT_TICKS_PER_MS);
+    OS_PORT_INIT();
+    OS_PORT_ENABLE_IRQ();
 
     for (;;)
     {
         uint8 pending;
 
-        cli();
+        OS_PORT_DISABLE_IRQ();
         pending = Os_PendingTicks;
         if (pending == 0U)
         {
-            /* idle: sleep until the next interrupt; sei+sleep is atomic on AVR */
-            sleep_enable();
-            sei();
-            sleep_cpu();
-            sleep_disable();
+            OS_PORT_IDLE();      /* sleep until the next interrupt, returns with interrupts enabled */
             continue;
         }
         Os_PendingTicks = (uint8)(pending - 1U);
-        sei();
+        OS_PORT_ENABLE_IRQ();
         if (pending > 1U)
         {
             Os_Overruns++;       /* the previous tick took longer than 1 ms */

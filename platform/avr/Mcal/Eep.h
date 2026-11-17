@@ -18,6 +18,10 @@
 
 #define EEP_SIZE              1024U
 
+/* NvM redundant block copies (any byte address works on this EEPROM) */
+#define EEP_NVM_COPY0_ADDR    0x0010U
+#define EEP_NVM_COPY1_ADDR    0x0040U
+
 typedef uint16 Eep_AddressType;
 typedef uint16 Eep_LengthType;
 

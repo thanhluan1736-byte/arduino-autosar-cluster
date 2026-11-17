@@ -29,13 +29,13 @@ static void IoHwAb_UpdatePedals(uint16 raw)
     const uint16 lo = IOHWAB_JOY_CENTER - IOHWAB_JOY_DEADZONE;
 
 #if (IOHWAB_JOY_Y_INVERT == STD_ON)
-    raw = (uint16)(1023U - raw);
+    raw = (uint16)(ADC_RESULT_MAX - raw);
 #endif
     IoHwAb_Throttle = 0U;
     IoHwAb_Brake = 0U;
     if (raw > hi)
     {
-        IoHwAb_Throttle = IoHwAb_Scale((uint16)(raw - hi), (uint16)(1023U - hi));
+        IoHwAb_Throttle = IoHwAb_Scale((uint16)(raw - hi), (uint16)(ADC_RESULT_MAX - hi));
     }
     else if (raw < lo)
     {
@@ -121,5 +121,6 @@ void IoHwAb_SetBuzzer(boolean On)
 
 void IoHwAb_SetTelltaleOverspeed(boolean On)
 {
-    Dio_WriteChannel(DioConf_DioChannel_LED_OVERSPEED, (On == TRUE) ? STD_HIGH : STD_LOW);
+    Dio_WriteChannel(DioConf_DioChannel_LED_OVERSPEED,
+                     (On == TRUE) ? DIO_LED_OVERSPEED_ON_LEVEL : (Dio_LevelType)(DIO_LED_OVERSPEED_ON_LEVEL ^ 1U));
 }

@@ -16,6 +16,7 @@
 
 /* Overspeed telltale = on-board LED (D13 / PB5) */
 #define DioConf_DioChannel_LED_OVERSPEED MCAL_PIN(MCAL_PORT_B, 5U)
+#define DIO_LED_OVERSPEED_ON_LEVEL       STD_HIGH   /* on-board LED is active high */
 /* A4 / A5 are SDA / SCL of the I2C bus (LCD1602), driven by the TWI unit, not by Dio */
 
 #endif /* DIO_CFG_H */

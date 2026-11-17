@@ -3,7 +3,7 @@
  *
  * This sketch is intentionally empty: the firmware does NOT use setup()/loop() or the Arduino core.
  * main() is in Main.c -> EcuM_Init() -> Os_Start(). All other files of this folder are the AUTOSAR layers
- * (MCAL, services, CDD, generated RTE, SWCs) copied flat from src/ of the PlatformIO project.
+ * (MCAL, services, CDD, generated RTE, SWCs) copied flat from src/ and platform/avr/ of the project.
  *
  * Board: Arduino Uno. Serial Monitor: 115200 baud.
  */

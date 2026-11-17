@@ -3,10 +3,11 @@
 #define IOHWAB_H
 
 #include "Std_Types.h"
+#include "Adc.h"
 
-/* joystick calibration (raw 10-bit ADC) */
-#define IOHWAB_JOY_CENTER       512U
-#define IOHWAB_JOY_DEADZONE     60U
+/* joystick calibration, scaled to the ADC resolution of the platform (10 bit AVR, 12 bit S32K) */
+#define IOHWAB_JOY_CENTER       ((ADC_RESULT_MAX + 1U) / 2U)
+#define IOHWAB_JOY_DEADZONE     ((ADC_RESULT_MAX * 6U) / 100U)   /* 6 % around the centre */
 #define IOHWAB_JOY_Y_INVERT     STD_OFF   /* STD_ON if pushing the stick "up" brakes instead of accelerating */
 #define IOHWAB_DEBOUNCE_SAMPLES 3U        /* x 10 ms */
 

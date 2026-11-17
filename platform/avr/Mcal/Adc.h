@@ -21,6 +21,8 @@ typedef uint8  Adc_ChannelType;        /* MUX value: 0 = A0 ... 5 = A5 */
 typedef uint8  Adc_GroupType;
 typedef uint16 Adc_ValueGroupType;     /* 10-bit result */
 
+#define ADC_RESULT_MAX             1023U   /* full scale of a conversion */
+
 typedef enum
 {
     ADC_IDLE = 0U,

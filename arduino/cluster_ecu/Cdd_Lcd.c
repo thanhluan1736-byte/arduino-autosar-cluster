@@ -1,7 +1,7 @@
 /* Cdd_Lcd.c - frame buffer + incremental refresh: only characters that changed are sent, one per call,
  * so a full 32-character update never blocks the scheduler (each I2C job takes ~0.4 ms in the background). */
-#include <util/delay.h>
 #include "Cdd_Lcd.h"
+#include "Mcu.h"
 #include "I2c.h"
 #include "Det.h"
 #include "Cdd_Log.h"
@@ -71,26 +71,26 @@ void Cdd_Lcd_Init(void)
         Cdd_Lcd_Shown[i] = ' ';
     }
     I2c_Init();
-    _delay_ms(50);                      /* HD44780 power-on time */
+    Mcu_DelayUs(50UL * 1000UL);                      /* HD44780 power-on time */
     {
         uint8 idle = LCD_BACKLIGHT;     /* PCF8574 powers up with all pins high (EN = 1): drive them low first */
         (void)I2c_WriteSync(CDD_LCD_I2C_ADDRESS, &idle, 1U);
-        _delay_ms(5);
+        Mcu_DelayUs(5UL * 1000UL);
     }
 
     /* HD44780 datasheet "initialization by instruction": 3 x 0x3 then 0x2 -> 4-bit mode */
     ok = Cdd_Lcd_NibbleSync(0x03U);
-    _delay_ms(5);
+    Mcu_DelayUs(5UL * 1000UL);
     ok = (boolean)(ok & Cdd_Lcd_NibbleSync(0x03U));
-    _delay_ms(5);
+    Mcu_DelayUs(5UL * 1000UL);
     ok = (boolean)(ok & Cdd_Lcd_NibbleSync(0x03U));
-    _delay_us(150);
+    Mcu_DelayUs(150UL);
     ok = (boolean)(ok & Cdd_Lcd_NibbleSync(0x02U));
-    _delay_us(150);
+    Mcu_DelayUs(150UL);
     ok = (boolean)(ok & Cdd_Lcd_SendSync(LCD_CMD_FUNC_4BIT_2L, 0U));
     ok = (boolean)(ok & Cdd_Lcd_SendSync(LCD_CMD_DISPLAY_ON, 0U));
     ok = (boolean)(ok & Cdd_Lcd_SendSync(LCD_CMD_CLEAR, 0U));
-    _delay_ms(2);                       /* clear takes 1.52 ms */
+    Mcu_DelayUs(2UL * 1000UL);                       /* clear takes 1.52 ms */
     ok = (boolean)(ok & Cdd_Lcd_SendSync(LCD_CMD_ENTRY_INC, 0U));
 
     Cdd_Lcd_Present = ok;
