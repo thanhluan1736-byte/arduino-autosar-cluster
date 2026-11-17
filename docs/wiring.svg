@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="530" viewBox="0 0 680 530" font-family="Segoe UI, Helvetica, Arial, sans-serif" role="img">
+<title>Wiring of the mini AUTOSAR cluster on an Arduino Uno</title>
+<desc>Joystick to 5V, GND, A1 (VRy), A2 (SW); buzzer to D3 and GND; LCD1602 I2C to A4, A5, 5V, GND; ULN2003 IN1..IN4 to D8..D11, powered from the breadboard power module; the power module GND is common with the Uno GND.</desc>
+<rect width="680" height="530" fill="#1f1f1e"/>
+<rect x="250" y="50" width="180" height="420" rx="8" fill="#444441" stroke="#888780" stroke-width="0.8"/>
+<text x="340" y="74" fill="#e8e6dc" font-size="14" font-weight="600" text-anchor="middle">Arduino Uno</text>
+<text x="340" y="92" fill="#b4b2a9" font-size="12" text-anchor="middle">USB</text>
+<g fill="#d3d1c7" font-size="12">
+<text x="258" y="119">5V</text><text x="258" y="139">GND</text><text x="258" y="159">A1</text><text x="258" y="179">A2</text>
+<text x="258" y="279">D3</text><text x="258" y="299">GND</text>
+<text x="422" y="119" text-anchor="end">A4 (SDA)</text><text x="422" y="139" text-anchor="end">A5 (SCL)</text>
+<text x="422" y="159" text-anchor="end">5V</text><text x="422" y="179" text-anchor="end">GND</text>
+<text x="422" y="259" text-anchor="end">D8</text><text x="422" y="279" text-anchor="end">D9</text>
+<text x="422" y="299" text-anchor="end">D10</text><text x="422" y="319" text-anchor="end">D11</text>
+<text x="422" y="434" text-anchor="end">GND</text>
+<text x="340" y="456" text-anchor="middle">LED L (D13) = overspeed telltale</text>
+</g>
+<g fill="#3c3489" stroke="#afa9ec" stroke-width="0.8">
+<rect x="40" y="80" width="150" height="110" rx="8"/>
+<rect x="40" y="240" width="150" height="70" rx="8"/>
+<rect x="490" y="80" width="150" height="110" rx="8"/>
+<rect x="490" y="220" width="150" height="116" rx="8"/>
+<rect x="490" y="400" width="150" height="56" rx="8"/>
+</g>
+<g fill="#eeedfe" font-size="14" font-weight="600" text-anchor="middle">
+<text x="115" y="101">Joystick</text>
+<text x="115" y="261">Buzzer</text>
+<text x="565" y="101">LCD1602 I2C</text>
+<text x="565" y="241">ULN2003 + 28BYJ-48</text>
+<text x="565" y="423">Power module</text>
+</g>
+<g fill="#cecbf6" font-size="12">
+<text x="52" y="119">+5V</text><text x="52" y="139">GND</text><text x="52" y="159">VRy</text><text x="52" y="179">SW</text>
+<text x="52" y="279">+ (or S)</text><text x="52" y="299">− (GND)</text>
+<text x="628" y="119" text-anchor="end">SDA</text><text x="628" y="139" text-anchor="end">SCL</text>
+<text x="628" y="159" text-anchor="end">VCC</text><text x="628" y="179" text-anchor="end">GND</text>
+<text x="628" y="259" text-anchor="end">IN1</text><text x="628" y="279" text-anchor="end">IN2</text>
+<text x="628" y="299" text-anchor="end">IN3</text><text x="628" y="319" text-anchor="end">IN4</text>
+<text x="502" y="330">+  −</text>
+<text x="565" y="443" text-anchor="middle">5V for the motor</text>
+</g>
+<g stroke-width="1.5" fill="none">
+<line x1="190" y1="115" x2="250" y2="115" stroke="#e24b4a"/>
+<line x1="190" y1="135" x2="250" y2="135" stroke="#888780" stroke-dasharray="4 3"/>
+<line x1="190" y1="155" x2="250" y2="155" stroke="#1d9e75"/>
+<line x1="190" y1="175" x2="250" y2="175" stroke="#1d9e75"/>
+<line x1="190" y1="275" x2="250" y2="275" stroke="#1d9e75"/>
+<line x1="190" y1="295" x2="250" y2="295" stroke="#888780" stroke-dasharray="4 3"/>
+<line x1="430" y1="115" x2="490" y2="115" stroke="#1d9e75"/>
+<line x1="430" y1="135" x2="490" y2="135" stroke="#1d9e75"/>
+<line x1="430" y1="155" x2="490" y2="155" stroke="#e24b4a"/>
+<line x1="430" y1="175" x2="490" y2="175" stroke="#888780" stroke-dasharray="4 3"/>
+<line x1="430" y1="255" x2="490" y2="255" stroke="#1d9e75"/>
+<line x1="430" y1="275" x2="490" y2="275" stroke="#1d9e75"/>
+<line x1="430" y1="295" x2="490" y2="295" stroke="#1d9e75"/>
+<line x1="430" y1="315" x2="490" y2="315" stroke="#1d9e75"/>
+<line x1="507" y1="336" x2="507" y2="400" stroke="#e24b4a"/>
+<line x1="521" y1="336" x2="521" y2="400" stroke="#888780" stroke-dasharray="4 3"/>
+<line x1="430" y1="430" x2="490" y2="430" stroke="#888780" stroke-dasharray="4 3"/>
+<line x1="60" y1="500" x2="90" y2="500" stroke="#1d9e75"/>
+<line x1="200" y1="500" x2="230" y2="500" stroke="#e24b4a"/>
+<line x1="300" y1="500" x2="330" y2="500" stroke="#888780" stroke-dasharray="4 3"/>
+</g>
+<g fill="#d3d1c7" font-size="12">
+<text x="98" y="504">Signal</text>
+<text x="238" y="504">5V</text>
+<text x="338" y="504">GND (all grounds common)</text>
+</g>
+</svg>

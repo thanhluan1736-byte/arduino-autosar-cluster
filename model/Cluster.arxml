@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mini AUTOSAR instrument cluster (Arduino Uno / ATmega328P)
+  SWC_DriverInput -> SWC_VehicleModel -> SWC_Gauge (needle) / SWC_Odometer (NvM) -> SWC_Display (LCD1602)
+  RTE generated with arxml2rte (rte_generator.py)
+-->
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_4-2-2.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE>
+      <SHORT-NAME>AppPackage</SHORT-NAME>
+      <ELEMENTS>
+        <!-- ===== Data types ===== -->
+        <SW-BASE-TYPE>
+          <SHORT-NAME>uint8</SHORT-NAME>
+          <CATEGORY>FIXED_LENGTH</CATEGORY>
+          <BASE-TYPE-SIZE>8</BASE-TYPE-SIZE>
+          <BASE-TYPE-ENCODING>NONE</BASE-TYPE-ENCODING>
+          <NATIVE-DECLARATION>uint8</NATIVE-DECLARATION>
+        </SW-BASE-TYPE>
+        <SW-BASE-TYPE>
+          <SHORT-NAME>uint16</SHORT-NAME>
+          <CATEGORY>FIXED_LENGTH</CATEGORY>
+          <BASE-TYPE-SIZE>16</BASE-TYPE-SIZE>
+          <BASE-TYPE-ENCODING>NONE</BASE-TYPE-ENCODING>
+          <NATIVE-DECLARATION>uint16</NATIVE-DECLARATION>
+        </SW-BASE-TYPE>
+        <SW-BASE-TYPE>
+          <SHORT-NAME>uint32</SHORT-NAME>
+          <CATEGORY>FIXED_LENGTH</CATEGORY>
+          <BASE-TYPE-SIZE>32</BASE-TYPE-SIZE>
+          <BASE-TYPE-ENCODING>NONE</BASE-TYPE-ENCODING>
+          <NATIVE-DECLARATION>unsigned long</NATIVE-DECLARATION>
+        </SW-BASE-TYPE>
+        <IMPLEMENTATION-DATA-TYPE>
+          <SHORT-NAME>dt_uint8</SHORT-NAME>
+          <CATEGORY>VALUE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <BASE-TYPE-REF DEST="SW-BASE-TYPE">/AppPackage/uint8</BASE-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+        </IMPLEMENTATION-DATA-TYPE>
+        <IMPLEMENTATION-DATA-TYPE>
+          <SHORT-NAME>dt_uint16</SHORT-NAME>
+          <CATEGORY>VALUE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <BASE-TYPE-REF DEST="SW-BASE-TYPE">/AppPackage/uint16</BASE-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+        </IMPLEMENTATION-DATA-TYPE>
+        <IMPLEMENTATION-DATA-TYPE>
+          <SHORT-NAME>dt_uint32</SHORT-NAME>
+          <CATEGORY>VALUE</CATEGORY>
+          <SW-DATA-DEF-PROPS>
+            <SW-DATA-DEF-PROPS-VARIANTS>
+              <SW-DATA-DEF-PROPS-CONDITIONAL>
+                <BASE-TYPE-REF DEST="SW-BASE-TYPE">/AppPackage/uint32</BASE-TYPE-REF>
+              </SW-DATA-DEF-PROPS-CONDITIONAL>
+            </SW-DATA-DEF-PROPS-VARIANTS>
+          </SW-DATA-DEF-PROPS>
+        </IMPLEMENTATION-DATA-TYPE>
+
+        <!-- ===== Sender-Receiver interfaces ===== -->
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>IF_Pedal</SHORT-NAME>
+          <IS-SERVICE>false</IS-SERVICE>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Throttle</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Brake</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>IF_ButtonEvent</SHORT-NAME>
+          <IS-SERVICE>false</IS-SERVICE>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Event</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Seq</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>IF_VehicleSpeed</SHORT-NAME>
+          <IS-SERVICE>false</IS-SERVICE>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Speed</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint16</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>IF_Distance</SHORT-NAME>
+          <IS-SERVICE>false</IS-SERVICE>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Odo</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint32</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_Trip</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint32</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_NvStatus</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+        <SENDER-RECEIVER-INTERFACE>
+          <SHORT-NAME>IF_TripReset</SHORT-NAME>
+          <IS-SERVICE>false</IS-SERVICE>
+          <DATA-ELEMENTS>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_ReqSeq</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+            <VARIABLE-DATA-PROTOTYPE>
+              <SHORT-NAME>Element_OdoReqSeq</SHORT-NAME>
+              <TYPE-TREF DEST="IMPLEMENTATION-DATA-TYPE">/AppPackage/dt_uint8</TYPE-TREF>
+            </VARIABLE-DATA-PROTOTYPE>
+          </DATA-ELEMENTS>
+        </SENDER-RECEIVER-INTERFACE>
+
+        <!-- ===== SWC_DriverInput ===== -->
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC_DriverInput</SHORT-NAME>
+          <PORTS>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_Pedal</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_Pedal</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_ButtonEvent</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_ButtonEvent</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR>
+              <SHORT-NAME>IB_SWC_DriverInput</SHORT-NAME>
+              <EVENTS>
+                <TIMING-EVENT>
+                  <SHORT-NAME>TE_DriverInput_10ms</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/AppPackage/SWC_DriverInput/IB_SWC_DriverInput/Runnable_DriverInput_10ms</START-ON-EVENT-REF>
+                  <PERIOD>0.01</PERIOD>
+                </TIMING-EVENT>
+              </EVENTS>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY>
+                  <SHORT-NAME>Runnable_DriverInput_10ms</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-SEND-POINTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_Pedal_Throttle</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_Pedal</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Pedal/Element_Throttle</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_Pedal_Brake</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_Pedal</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Pedal/Element_Brake</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_ButtonEvent_Event</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_ButtonEvent</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_ButtonEvent/Element_Event</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_ButtonEvent_Seq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_ButtonEvent</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_ButtonEvent/Element_Seq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-SEND-POINTS>
+                  <SYMBOL>Runnable_DriverInput_10ms</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+
+        <!-- ===== SWC_VehicleModel ===== -->
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC_VehicleModel</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_Pedal</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_Pedal</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_SpeedGauge</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_SpeedOdo</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_SpeedDisplay</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR>
+              <SHORT-NAME>IB_SWC_VehicleModel</SHORT-NAME>
+              <EVENTS>
+                <TIMING-EVENT>
+                  <SHORT-NAME>TE_VehicleModel_10ms</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/AppPackage/SWC_VehicleModel/IB_SWC_VehicleModel/Runnable_VehicleModel_10ms</START-ON-EVENT-REF>
+                  <PERIOD>0.01</PERIOD>
+                </TIMING-EVENT>
+              </EVENTS>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY>
+                  <SHORT-NAME>Runnable_VehicleModel_10ms</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_Pedal_Throttle</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Rp_Pedal</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Pedal/Element_Throttle</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_Pedal_Brake</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Rp_Pedal</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Pedal/Element_Brake</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                  <DATA-SEND-POINTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_SpeedGauge_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedGauge</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_SpeedOdo_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedOdo</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_SpeedDisplay_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedDisplay</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-SEND-POINTS>
+                  <SYMBOL>Runnable_VehicleModel_10ms</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+
+        <!-- ===== SWC_Gauge ===== -->
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC_Gauge</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_SpeedGauge</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR>
+              <SHORT-NAME>IB_SWC_Gauge</SHORT-NAME>
+              <EVENTS>
+                <TIMING-EVENT>
+                  <SHORT-NAME>TE_Gauge_20ms</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/AppPackage/SWC_Gauge/IB_SWC_Gauge/Runnable_Gauge_20ms</START-ON-EVENT-REF>
+                  <PERIOD>0.02</PERIOD>
+                </TIMING-EVENT>
+              </EVENTS>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY>
+                  <SHORT-NAME>Runnable_Gauge_20ms</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_SpeedGauge_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Gauge/Rp_SpeedGauge</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                  <SYMBOL>Runnable_Gauge_20ms</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+
+        <!-- ===== SWC_Odometer ===== -->
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC_Odometer</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_SpeedOdo</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_Distance</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_Distance</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_TripReset</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_TripReset</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR>
+              <SHORT-NAME>IB_SWC_Odometer</SHORT-NAME>
+              <EVENTS>
+                <TIMING-EVENT>
+                  <SHORT-NAME>TE_Odometer_100ms</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/AppPackage/SWC_Odometer/IB_SWC_Odometer/Runnable_Odometer_100ms</START-ON-EVENT-REF>
+                  <PERIOD>0.1</PERIOD>
+                </TIMING-EVENT>
+              </EVENTS>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY>
+                  <SHORT-NAME>Runnable_Odometer_100ms</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_SpeedOdo_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Rp_SpeedOdo</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_TripReset_ReqSeq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Rp_TripReset</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_TripReset/Element_ReqSeq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_TripReset_OdoReqSeq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Rp_TripReset</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_TripReset/Element_OdoReqSeq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                  <DATA-SEND-POINTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_Distance_Odo</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Pp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_Odo</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_Distance_Trip</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Pp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_Trip</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_Distance_NvStatus</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Pp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_NvStatus</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-SEND-POINTS>
+                  <SYMBOL>Runnable_Odometer_100ms</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+
+        <!-- ===== SWC_Display ===== -->
+        <APPLICATION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>SWC_Display</SHORT-NAME>
+          <PORTS>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_Distance</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_Distance</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_ButtonEvent</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_ButtonEvent</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+            <P-PORT-PROTOTYPE>
+              <SHORT-NAME>Pp_TripReset</SHORT-NAME>
+              <PROVIDED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_TripReset</PROVIDED-INTERFACE-TREF>
+            </P-PORT-PROTOTYPE>
+            <R-PORT-PROTOTYPE>
+              <SHORT-NAME>Rp_SpeedDisplay</SHORT-NAME>
+              <REQUIRED-INTERFACE-TREF DEST="SENDER-RECEIVER-INTERFACE">/AppPackage/IF_VehicleSpeed</REQUIRED-INTERFACE-TREF>
+            </R-PORT-PROTOTYPE>
+          </PORTS>
+          <INTERNAL-BEHAVIORS>
+            <SWC-INTERNAL-BEHAVIOR>
+              <SHORT-NAME>IB_SWC_Display</SHORT-NAME>
+              <EVENTS>
+                <TIMING-EVENT>
+                  <SHORT-NAME>TE_Display_100ms</SHORT-NAME>
+                  <START-ON-EVENT-REF DEST="RUNNABLE-ENTITY">/AppPackage/SWC_Display/IB_SWC_Display/Runnable_Display_100ms</START-ON-EVENT-REF>
+                  <PERIOD>0.1</PERIOD>
+                </TIMING-EVENT>
+              </EVENTS>
+              <RUNNABLES>
+                <RUNNABLE-ENTITY>
+                  <SHORT-NAME>Runnable_Display_100ms</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0</MINIMUM-START-INTERVAL>
+                  <CAN-BE-INVOKED-CONCURRENTLY>false</CAN-BE-INVOKED-CONCURRENTLY>
+                  <DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_Distance_Odo</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_Odo</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_Distance_Trip</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_Trip</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_Distance_NvStatus</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_Distance</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_Distance/Element_NvStatus</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_ButtonEvent_Event</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_ButtonEvent</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_ButtonEvent/Element_Event</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_ButtonEvent_Seq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_ButtonEvent</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_ButtonEvent/Element_Seq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DRP_SpeedDisplay_Speed</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_SpeedDisplay</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_VehicleSpeed/Element_Speed</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-RECEIVE-POINT-BY-ARGUMENTS>
+                  <DATA-SEND-POINTS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_TripReset_ReqSeq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Display/Pp_TripReset</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_TripReset/Element_ReqSeq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                      <VARIABLE-ACCESS>
+                        <SHORT-NAME>DSP_TripReset_OdoReqSeq</SHORT-NAME>
+                        <ACCESSED-VARIABLE>
+                          <AUTOSAR-VARIABLE-IREF>
+                            <PORT-PROTOTYPE-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Display/Pp_TripReset</PORT-PROTOTYPE-REF>
+                            <TARGET-DATA-PROTOTYPE-REF DEST="VARIABLE-DATA-PROTOTYPE">/AppPackage/IF_TripReset/Element_OdoReqSeq</TARGET-DATA-PROTOTYPE-REF>
+                          </AUTOSAR-VARIABLE-IREF>
+                        </ACCESSED-VARIABLE>
+                      </VARIABLE-ACCESS>
+                  </DATA-SEND-POINTS>
+                  <SYMBOL>Runnable_Display_100ms</SYMBOL>
+                </RUNNABLE-ENTITY>
+              </RUNNABLES>
+            </SWC-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </APPLICATION-SW-COMPONENT-TYPE>
+
+        <!-- ===== Composition + VFB connectors ===== -->
+        <COMPOSITION-SW-COMPONENT-TYPE>
+          <SHORT-NAME>Cluster_Composition</SHORT-NAME>
+          <COMPONENTS>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>CP_DriverInput</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/AppPackage/SWC_DriverInput</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>CP_VehicleModel</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/AppPackage/SWC_VehicleModel</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>CP_Gauge</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/AppPackage/SWC_Gauge</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>CP_Odometer</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/AppPackage/SWC_Odometer</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+            <SW-COMPONENT-PROTOTYPE>
+              <SHORT-NAME>CP_Display</SHORT-NAME>
+              <TYPE-TREF DEST="APPLICATION-SW-COMPONENT-TYPE">/AppPackage/SWC_Display</TYPE-TREF>
+            </SW-COMPONENT-PROTOTYPE>
+          </COMPONENTS>
+          <CONNECTORS>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_Pedal</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_DriverInput</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_Pedal</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_VehicleModel</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Rp_Pedal</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_ButtonEvent</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_DriverInput</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_DriverInput/Pp_ButtonEvent</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Display</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_ButtonEvent</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_SpeedGauge</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_VehicleModel</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedGauge</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Gauge</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Gauge/Rp_SpeedGauge</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_SpeedOdo</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_VehicleModel</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedOdo</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Odometer</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Rp_SpeedOdo</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_SpeedDisplay</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_VehicleModel</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_VehicleModel/Pp_SpeedDisplay</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Display</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_SpeedDisplay</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_Distance</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Odometer</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Pp_Distance</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Display</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Display/Rp_Distance</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+            <ASSEMBLY-SW-CONNECTOR>
+              <SHORT-NAME>Conn_TripReset</SHORT-NAME>
+              <PROVIDER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Display</CONTEXT-COMPONENT-REF>
+                <TARGET-P-PORT-REF DEST="P-PORT-PROTOTYPE">/AppPackage/SWC_Display/Pp_TripReset</TARGET-P-PORT-REF>
+              </PROVIDER-IREF>
+              <REQUESTER-IREF>
+                <CONTEXT-COMPONENT-REF DEST="SW-COMPONENT-PROTOTYPE">/AppPackage/Cluster_Composition/CP_Odometer</CONTEXT-COMPONENT-REF>
+                <TARGET-R-PORT-REF DEST="R-PORT-PROTOTYPE">/AppPackage/SWC_Odometer/Rp_TripReset</TARGET-R-PORT-REF>
+              </REQUESTER-IREF>
+            </ASSEMBLY-SW-CONNECTOR>
+          </CONNECTORS>
+        </COMPOSITION-SW-COMPONENT-TYPE>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>
